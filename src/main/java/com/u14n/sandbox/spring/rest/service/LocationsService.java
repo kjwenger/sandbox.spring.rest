@@ -2,19 +2,18 @@ package com.u14n.sandbox.spring.rest.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.u14n.sandbox.model.DAOException;
 import com.u14n.sandbox.model.Location;
 import com.u14n.sandbox.model.LocationDAO;
 
-@Controller
-@RequestMapping("/locations")
+@RestController
 public class LocationsService {
 
 	private LocationDAO locationDAO = new LocationDAO.ConcurrentMemory();
@@ -39,7 +38,7 @@ public class LocationsService {
 	}
 
 	@RequestMapping(
-			value = "/{id}",
+			value = "/locations/{id}",
 			method = RequestMethod.GET,
 			headers = "Accept=application/json",
 			produces = { "application/json" })
@@ -50,7 +49,7 @@ public class LocationsService {
 	}
 
 	@RequestMapping(
-			value = "/htmllist",
+			value = "/locations.html",
 			method = RequestMethod.GET,
 			headers = "Accept=text/html",
 			produces = { "text/html" })
@@ -74,7 +73,7 @@ public class LocationsService {
 	}
 
 	@RequestMapping(
-			value = "/list",
+			value = "/locations/list",
 			method = RequestMethod.GET,
 			headers = "Accept=application/json",
 			produces = { "application/json" })
@@ -84,6 +83,7 @@ public class LocationsService {
 	}
 
 	@RequestMapping(
+			value = "/locations",
 			method = RequestMethod.GET,
 			headers = "Accept=application/json",
 			produces = { "application/json" })
@@ -93,7 +93,27 @@ public class LocationsService {
 	}
 
 	@RequestMapping(
-			value = "/{id}",
+			value = "/locations.json",
+			method = RequestMethod.GET,
+			headers = "Accept=application/json",
+			produces = { "application/json" })
+	@ResponseBody
+	public List<Location> getLocationsJson() throws DAOException {
+		return this.locationDAO.findAll();
+	}
+
+	@RequestMapping(
+			value = "/locations.xml",
+			method = RequestMethod.GET,
+//			headers = "Accept=text/xml",
+			produces = { "text/xml" })
+	@ResponseBody
+	public List<Location> getLocationsXml() throws DAOException {
+		return this.locationDAO.findAll();
+	}
+
+	@RequestMapping(
+			value = "/locations/{id}",
 			method = RequestMethod.PUT,
 			headers = "Accept=application/json",
 			produces = { "application/json" },
@@ -117,7 +137,7 @@ public class LocationsService {
 	}
 
 	@RequestMapping(
-			value = "/{id}",
+			value = "/locations/{id}",
 			method = RequestMethod.DELETE,
 			headers = "Accept=application/json",
 			produces = { "application/json" })
@@ -135,6 +155,7 @@ public class LocationsService {
 	}
 
 	@RequestMapping(
+			value = "/locations",
 			method = RequestMethod.POST,
 			headers = "Accept=application/json",
 			produces = { "application/json" },
