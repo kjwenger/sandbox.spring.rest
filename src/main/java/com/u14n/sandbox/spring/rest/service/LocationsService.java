@@ -14,6 +14,7 @@ import com.u14n.sandbox.model.Location;
 import com.u14n.sandbox.model.LocationDAO;
 
 @RestController
+@RequestMapping("/restapi")
 public class LocationsService {
 
 	private LocationDAO locationDAO = new LocationDAO.ConcurrentMemory();
@@ -35,6 +36,7 @@ public class LocationsService {
 		} catch (DAOException e) {
 			// Ignore
 		}
+																				System.out.println("LocationsService.LocationsService()");
 	}
 
 	@RequestMapping(
@@ -45,7 +47,8 @@ public class LocationsService {
 	@ResponseBody
 	public Location getLocation(@PathVariable int id)
 			throws DAOException {
-		return this.locationDAO.findById(id);
+																				System.out.println("LocationsService.getLocation() id=" + id);
+		return this.locationDAO.findByIdentity(id);
 	}
 
 	@RequestMapping(
@@ -56,6 +59,7 @@ public class LocationsService {
 	@ResponseBody
 	public String getLocationListHTML() 
 			throws DAOException {
+																				System.out.println("LocationsService.getLocationListHTML()");
 		String retVal = "<html><body><table border=1>";
 		List<Location> locations = this.locationDAO.findAll();
 		for (Location location : locations) {
@@ -79,6 +83,7 @@ public class LocationsService {
 			produces = { "application/json" })
 	@ResponseBody
 	public List<Location> getLocationList() throws DAOException {
+																				System.out.println("LocationsService.getLocationList()");
 		return this.locationDAO.findAll();
 	}
 
@@ -89,6 +94,7 @@ public class LocationsService {
 			produces = { "application/json" })
 	@ResponseBody
 	public List<Location> getLocations() throws DAOException {
+																				System.out.println("LocationsService.getLocations()");
 		return this.locationDAO.findAll();
 	}
 
@@ -99,6 +105,7 @@ public class LocationsService {
 			produces = { "application/json" })
 	@ResponseBody
 	public List<Location> getLocationsJson() throws DAOException {
+																				System.out.println("LocationsService.getLocationsJson()");
 		return this.locationDAO.findAll();
 	}
 
@@ -109,6 +116,7 @@ public class LocationsService {
 			produces = { "text/xml" })
 	@ResponseBody
 	public List<Location> getLocationsXml() throws DAOException {
+																				System.out.println("LocationsService.getLocationsXml()");
 		return this.locationDAO.findAll();
 	}
 
@@ -119,9 +127,10 @@ public class LocationsService {
 			produces = { "application/json" },
 			consumes = { "application/json" })
 	@ResponseBody
-	public Location editLocation(
+	public Location updateLocation(
 			@RequestBody Location newLocation,
 			@PathVariable int id) throws DAOException {
+																				System.out.println("LocationsService.updateLocation()");
 		List<Location> locations = this.locationDAO.findAll();
 		for (Location location : locations) {
 			if (id == location.getId()) {
@@ -143,7 +152,7 @@ public class LocationsService {
 			produces = { "application/json" })
 	@ResponseBody
 	public boolean deleteLocation(@PathVariable int id) throws DAOException {
-		System.out.println("Delete call.");
+																				System.out.println("LocationsService.deleteLocation() id=" + id);
 		List<Location> locations = this.locationDAO.findAll();
 		for (Location location : locations) {
 			if (location.getId() == id) {
@@ -163,6 +172,7 @@ public class LocationsService {
 	@ResponseBody
 	public boolean createLocation(@RequestBody Location location)
 			throws DAOException {
+																				System.out.println("LocationsService.createLocation() location=" + location);
 		this.locationDAO.insert(location);
 		return true;
 	}

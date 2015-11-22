@@ -1,6 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:ctx="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	                    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
@@ -14,24 +15,7 @@
 		<oxm:class-to-be-bound name="com.u14n.sandbox.model.Location" />
 	</oxm:jaxb2-marshaller>
 
-	<!-- <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-		<property name="classesToBeBound">
-			<list>
-				<value>com.u14n.sandbox.model.Location</value>
-			</list>
-		</property>
-		<property name="schema" value="classpath:org/springframework/oxm/schema.xsd" />
-	</bean> -->
+	<mvc:annotation-driven />
 
-	<!-- <bean id="jaxbAnnIntrospector" class="com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector" 
-		/> <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.map.ObjectMapper"> 
-		<property name="serializationConfig.annotationIntrospector" ref="jaxbAnnIntrospector" 
-		/> <property name="deserializationConfig.annotationIntrospector" ref="jaxbAnnIntrospector" 
-		/> </bean> -->
-
-	<mvc:annotation-driven>
-		<!-- <mvc:message-converters> <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" 
-			/> </mvc:message-converters> -->
-	</mvc:annotation-driven>
-	<context:component-scan base-package="com.u14n.sandbox.spring.rest.service" />
+	<ctx:component-scan base-package="com.u14n.sandbox.spring.rest.service" />
 </beans>
