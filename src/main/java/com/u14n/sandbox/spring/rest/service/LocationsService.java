@@ -2,18 +2,18 @@ package com.u14n.sandbox.spring.rest.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.u14n.sandbox.model.DAOException;
 import com.u14n.sandbox.model.Location;
 import com.u14n.sandbox.model.LocationDAO;
 
-@RestController
+@Controller("locationsService")
 @RequestMapping("/restapi")
 public class LocationsService {
 
@@ -85,6 +85,14 @@ public class LocationsService {
 	public List<Location> getLocationList() throws DAOException {
 																				System.out.println("LocationsService.getLocationList()");
 		return this.locationDAO.findAll();
+	}
+
+	@RequestMapping(
+			value = "/locations",
+			method = RequestMethod.HEAD)
+	@ResponseBody
+	public void headLocations() {
+																				System.out.println("LocationsService.headLocations()");
 	}
 
 	@RequestMapping(
