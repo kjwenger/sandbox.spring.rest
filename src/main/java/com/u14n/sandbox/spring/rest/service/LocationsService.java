@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.u14n.sandbox.model.DAOException;
-import com.u14n.sandbox.model.Location;
-import com.u14n.sandbox.model.LocationDAO;
+import com.u14n.sandbox.model.geography.Location;
+import com.u14n.sandbox.model.geography.LocationDAO;
 
 @Controller("locationsService")
 @RequestMapping("/restapi")
@@ -26,13 +26,15 @@ public class LocationsService {
 					"NC",
 					"27601",
 					"Raleigh",
-					"500 S McDowell St"));
+					"S McDowell St",
+					"500"));
 			this.locationDAO.insert(new Location(
 					"USA",
 					"NC",
 					"27601",
 					"Raleigh",
-					"100 E Davie Street"));
+					"E Davie Street",
+					"100"));
 		} catch (DAOException e) {
 			// Ignore
 		}
